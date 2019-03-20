@@ -1,0 +1,32 @@
+{
+  "name": "db_personalproject",
+  "version": "1.0.0",
+  "description": "data base for mio",
+  "main": "index.js",
+  "scripts": {
+    "start:local": "$(npm bin)/nodemon index.js &",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeribertoUroza/mio_db.git"
+  },
+  "keywords": [
+    "database",
+    "mio"
+  ],
+  "author": "Heriberto Uroza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HeribertoUroza/mio_db/issues"
+  },
+  "homepage": "https://github.com/HeribertoUroza/mio_db#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.10"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0"
+  }
+}
