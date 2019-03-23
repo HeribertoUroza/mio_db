@@ -5,10 +5,13 @@ const userRouter = express.Router();
 
 // app.js => app.use('/users', userRouter)
 
-userRouter.get('/', (req,res) => {
-    res.json({
-        message: 'test'
-    })
-})
+// -----------TESTING ROUTE
+// userRouter.get('/', (req,res) => {
+//     res.json({
+//         message: 'test'
+//     })
+// })
+
+
 
 module.exports = userRouter;
