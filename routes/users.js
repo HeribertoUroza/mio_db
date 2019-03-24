@@ -13,5 +13,24 @@ const userRouter = express.Router();
 // })
 
 
+// Create User
+userRouter.post('/', (req,res) => {
+    // switched from username to email due to firebase and e-commerce
+    const { email, firebase_uid , bio, profile_pic_url } = req.body;
+
+    UserService.create(email, firebase_uid, bio, profile_pic_url )
+        .then(data => {
+            res.json({data:data})
+        })
+        .catch(err => {
+            res.json(err.toString())
+        })
+
+    // res.json({
+    //     message: 'test'
+    // })
+})
+
+
 
 module.exports = userRouter;

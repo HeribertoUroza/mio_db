@@ -6,9 +6,9 @@ CREATE DATABASE mio;
 CREATE TABLE users 
 (
     id SERIAL PRIMARY KEY,
-    username VARCHAR NOT NULL UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
-    bio VARCHAR NOT NULL,
+    firebase_uid VARCHAR NOT NULL,
+    bio VARCHAR,
     profile_pic_url VARCHAR,
     createdAt TIMESTAMP DEFAULT NOW(),
     updatedAt TIMESTAMP DEFAULT NOW()
@@ -48,38 +48,38 @@ CREATE TABLE purchase_list
 
 
 INSERT INTO users
-    (id,username, email, bio, profile_pic_url, createdAt, updatedAt)
+    (email, firebase_uid, bio, profile_pic_url)
 VALUES
-    (1, 'John', 'john@email.com', 'johns bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', NOW(), NOW() ),
-    (2, 'Michelle', 'michelle@email.com', 'michelle bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', NOW(), NOW() ),
-    (3, 'Heri', 'me@email.com', 'heri bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', NOW(), NOW() ),
-    (4, 'Yerr', 'adfvafvfsdfvvf@email.com', 'yerr bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', NOW(), NOW() );
+    ('john@email.com', 'firebase_uid','johns bio', null ),
+    ('michelle@email.com','firebase_uid' , 'michelle bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' ),
+    ('me@email.com', 'firebase_uid','heri bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' ),
+    ('adfvafvfsdfvvf@email.com', 'firebase_uid', null, 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' );
 
 INSERT INTO products
-    (id,seller_id, title_product, img_url, amount, product_desc, createdAt, updatedAt)
+    (seller_id, title_product, img_url, amount, product_desc )
 VALUES
-    ( 1,1, 'Title 1', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 999, 'this is a thing', NOW(), NOW() ),
-    ( 2,2, 'Title 2', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1212, 'this is another thing' , NOW(), NOW() ),
-    ( 3,2, 'Title 3', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 23, 'wut brah', NOW(), NOW() ),
-    ( 4,4, 'Title 4', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1, 'lol u want an desc????', NOW(), NOW() );
+    (1, 'Title 1', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 999, 'this is a thing' ),
+    (2, 'Title 2', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1212, 'this is another thing' ),
+    (2, 'Title 3', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 23, 'wut brah' ),
+    (4, 'Title 4', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1, 'lol u want an desc????' );
 
 INSERT INTO ratings
-    (id, user_id, product_id, rating_amount, comment, createdAt, updatedAt)
+    (user_id, product_id, rating_amount, comment )
 VALUES
-    ( 1, 1, 1, 5, 'comment 1', NOW(), NOW() ),
-    ( 2, 2, 1, 4, 'comment 2', NOW(), NOW() ),
-    ( 3, 2, 2, 3, 'comment 1', NOW(), NOW() ),
-    ( 4, 2, 2, 2, 'comment 2', NOW(), NOW() ),
-    ( 5, 4, 3, 1, 'comment 1', NOW(), NOW() ),
-    ( 6, 4, 3, 3, 'comment 2', NOW(), NOW() ),
-    ( 7, 4, 4, 5, 'comment 1', NOW(), NOW() ),
-    ( 8, 4, 4, 2, 'comment 2', NOW(), NOW() );
+    (1, 1, 5, 'comment 1'),
+    (2, 1, 4, 'comment 2'),
+    (2, 2, 3, 'comment 1'),
+    (2, 2, 2, 'comment 2'),
+    (4, 3, 1, 'comment 1'),
+    (4, 3, 3, 'comment 2'),
+    (4, 4, 5, 'comment 1'),
+    (4, 4, 2, 'comment 2');
     
 INSERT INTO purchase_list
-    (id,user_id, product_id, product_list)
+    (user_id, product_id, product_list)
 VALUES
-    ( 1, 1, 1, 1 ),
-    ( 2, 2, 2, 2),
-    ( 3, 2, 3, 0),
-    ( 4, 4, 4, 1);
+    (1, 1, 1 ),
+    (2, 2, 2),
+    (2, 3, 0),
+    (4, 4, 1);
 
