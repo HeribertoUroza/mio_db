@@ -53,6 +53,31 @@ userRouter.get('/:id' , ( req , res ) => {
 
 })
 
+userRouter.put('/:id', (req, res) => {
+    const { username, email, bio, profile_pic_url } = req.body;
+    const { id } = req.params;
+
+    UserService.read(id)
+        .then(data => {
+            //res.json(data)
+            UserService.update(id, username, email, bio, profile_pic_url)
+                .then((data) => {
+                    res.json({
+                        success: `Username: ${username} updated.`,
+                        data: data
+                    });
+                })
+                .catch(err => {
+                    res.json(err.toString());
+                })
+        })
+        .catch(err => {
+            res.json(err.toString())
+        })
+
+
+    
+});
 
 
 module.exports = userRouter;

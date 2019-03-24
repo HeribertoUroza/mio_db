@@ -11,12 +11,12 @@ UserService.read = (id) => {
     return db.any('SELECT * FROM users WHERE id=${id}', {id})
 }
 
-UserService.update = () => {
-
+UserService.update = (id, username, email, firebase_uid, bio, profile_pic_url) => {
+    return db.none('UPDATE users SET username=${username}, email=${email}, firebase_uid=${firebase_uid}, bio=${bio}, profile_pic_url=${profile_pic_url}, updatedAt=NOW() WHERE id=${id} ', { id, username, email, firebase_uid, bio, profile_pic_url })
 }
 
 UserService.delete = () => {
-
+    return db.none('DELETE FROM users ')
 }
 
 module.exports = UserService;
