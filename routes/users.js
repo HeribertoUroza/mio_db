@@ -20,16 +20,24 @@ userRouter.post('/', (req,res) => {
 
     UserService.create(email, firebase_uid, bio, profile_pic_url )
         .then(data => {
-            res.json({data:data})
+            //res.json({data:data})
+            res.json({
+                message: `User has been created with the email: ${email}`
+            })
         })
         .catch(err => {
-            res.json(err.toString())
+            //res.json(err.toString())
+            res.json({
+                message: `Oops Something Went Wrong`
+            })
         })
 
     // res.json({
     //     message: 'test'
     // })
 })
+
+// Read User
 
 
 
