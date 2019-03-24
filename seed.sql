@@ -6,6 +6,7 @@ CREATE DATABASE mio;
 CREATE TABLE users 
 (
     id SERIAL PRIMARY KEY,
+    username VARCHAR NOT NULL UNIQUE,
     email VARCHAR NOT NULL UNIQUE,
     firebase_uid VARCHAR NOT NULL,
     bio VARCHAR,
@@ -48,12 +49,12 @@ CREATE TABLE purchase_list
 
 
 INSERT INTO users
-    (email, firebase_uid, bio, profile_pic_url)
+    (username, email, firebase_uid, bio, profile_pic_url)
 VALUES
-    ('john@email.com', 'firebase_uid','johns bio', null ),
-    ('michelle@email.com','firebase_uid' , 'michelle bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' ),
-    ('me@email.com', 'firebase_uid','heri bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' ),
-    ('adfvafvfsdfvvf@email.com', 'firebase_uid', null, 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' );
+    ('user1','john@email.com', 'firebase_uid','johns bio', null ),
+    ('user2','michelle@email.com','firebase_uid' , 'michelle bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' ),
+    ('user3','me@email.com', 'firebase_uid','heri bio', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' ),
+    ('user4','adfvafvfsdfvvf@email.com', 'firebase_uid', null, 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' );
 
 INSERT INTO products
     (seller_id, title_product, img_url, amount, product_desc )

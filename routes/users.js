@@ -14,19 +14,20 @@ const userRouter = express.Router();
 
 
 // Create User
-userRouter.post('/', (req,res) => {
-    // switched from username to email due to firebase and e-commerce
-    const { email, firebase_uid , bio, profile_pic_url } = req.body;
+userRouter.post('/', ( req , res ) => {
+    const { username, email, firebase_uid , bio, profile_pic_url } = req.body;
 
-    UserService.create(email, firebase_uid, bio, profile_pic_url )
+    UserService.create(username, email, firebase_uid, bio, profile_pic_url )
         .then(data => {
             //res.json({data:data})
+            res.status(200)
             res.json({
-                message: `User has been created with the email: ${email}`
+                message: `User: ${username} has been created with the email: ${email}`
             })
         })
         .catch(err => {
             //res.json(err.toString())
+            res.status(400)
             res.json({
                 message: `Oops Something Went Wrong`
             })
@@ -38,6 +39,19 @@ userRouter.post('/', (req,res) => {
 })
 
 // Read User
+userRouter.get('/:id' , ( req , res ) => {
+    const { id } = req.params;
+
+    //res.json({id})
+    UserService.read( id )
+    .then(data => {
+        res.json(data)
+    })
+    .catch(err => {
+        res.json(err.toString())
+    })
+
+})
 
 
 
