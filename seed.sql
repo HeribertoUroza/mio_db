@@ -18,32 +18,44 @@ CREATE TABLE users
 CREATE TABLE products 
 (
     id SERIAL PRIMARY KEY,
-    seller_id INT REFERENCES users(id) NOT NULL,
+    user_id INT NOT NULL,
     title_product VARCHAR NOT NULL,
     img_url VARCHAR NOT NULL,
     amount INT,
     product_desc VARCHAR NOT NULL,
     createdAt TIMESTAMP DEFAULT NOW(),
-    updatedAt TIMESTAMP DEFAULT NOW()
+    updatedAt TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE ratings
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) NOT NULL,
-    product_id INT REFERENCES products(id) NOT NULL,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
     rating_amount INT,
     comment VARCHAR NOT NULL,
     createdAt TIMESTAMP DEFAULT NOW(),
-    updatedAt TIMESTAMP DEFAULT NOW()
+    updatedAt TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE,
+    FOREIGN KEY (product_id)
+    REFERENCES products(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE purchase_list
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) NOT NULL,
-    product_id INT REFERENCES products(id) NOT NULL,
-    product_list INT
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    product_list INT,
+    FOREIGN KEY (user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
     
 );
 
@@ -57,7 +69,7 @@ VALUES
     ('user4','adfvafvfsdfvvf@email.com', 'firebase_uid', null, 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' );
 
 INSERT INTO products
-    (seller_id, title_product, img_url, amount, product_desc )
+    (user_id, title_product, img_url, amount, product_desc )
 VALUES
     (1, 'Title 1', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 999, 'this is a thing' ),
     (2, 'Title 2', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1212, 'this is another thing' ),

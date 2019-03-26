@@ -45,10 +45,15 @@ userRouter.get('/:id' , ( req , res ) => {
     //res.json({id})
     UserService.read( id )
     .then(data => {
-        res.json(data)
+        if(data.length === 0) {
+            res.json({ message: `user doesnt exist` })
+        }
+        else res.json(data)
     })
     .catch(err => {
-        res.json(err.toString())
+        res.json({
+            message: err.toString()
+        })
     })
 
 })
@@ -74,10 +79,37 @@ userRouter.put('/:id', (req, res) => {
         .catch(err => {
             res.json(err.toString())
         })
-
-
-    
 });
+
+userRouter.delete('/:id' , ( req , res) => {
+    const { id } = req.params;
+
+
+    UserService.read(id)
+        .then(data => {
+            if (data.length === 0) {
+                res.json({ message: `user doesnt exist` })
+            }
+            else UserService.delete(id)
+                .then(data => {
+                    res.json({
+                        message: `User with ID: ${id} deleted`,
+                        data: data
+
+                    })
+                })
+                .catch(err => {
+                    res.json({
+                        message: err.toString()
+                    })
+                })
+        })
+        .catch(err => {
+            res.json({
+                message: err.toString()
+            })
+        })
+})
 
 
 module.exports = userRouter;
