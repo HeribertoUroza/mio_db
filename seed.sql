@@ -19,6 +19,7 @@ CREATE TABLE products
 (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
+    username VARCHAR NOT NULL,
     title_product VARCHAR NOT NULL,
     img_url VARCHAR NOT NULL,
     amount INT,
@@ -27,6 +28,9 @@ CREATE TABLE products
     updatedAt TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (user_id)
     REFERENCES users(id)
+    ON DELETE CASCADE,
+    FOREIGN KEY (username)
+    REFERENCES users(username)
     ON DELETE CASCADE
 );
 
@@ -69,12 +73,12 @@ VALUES
     ('user4','adfvafvfsdfvvf@email.com', 'firebase_uid', null, 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48' );
 
 INSERT INTO products
-    (user_id, title_product, img_url, amount, product_desc )
+    (user_id, username, title_product, img_url, amount, product_desc )
 VALUES
-    (1, 'Title 1', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 999, 'this is a thing' ),
-    (2, 'Title 2', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1212, 'this is another thing' ),
-    (2, 'Title 3', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 23, 'wut brah' ),
-    (4, 'Title 4', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1, 'lol u want an desc????' );
+    (1, 'user1','Title 1', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 999, 'this is a thing' ),
+    (2, 'user2','Title 2', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1212, 'this is another thing' ),
+    (2, 'user3','Title 3', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 23, 'wut brah' ),
+    (4, 'user4','Title 4', 'https://ca.slack-edge.com/TD416AWAE-UD3U8EFNX-c31fe5045e93-48', 1, 'lol u want an desc????' );
 
 INSERT INTO ratings
     (user_id, product_id, rating_amount, comment )

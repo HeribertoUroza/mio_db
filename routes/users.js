@@ -39,11 +39,11 @@ userRouter.post('/', ( req , res ) => {
 })
 
 // Read User
-userRouter.get('/:id' , ( req , res ) => {
-    const { id } = req.params;
+userRouter.get('/:firebase_uid' , ( req , res ) => {
+    const { firebase_uid } = req.params;
 
     //res.json({id})
-    UserService.read( id )
+    UserService.read(firebase_uid )
     .then(data => {
         if(data.length === 0) {
             res.json({ message: `user doesnt exist` })
